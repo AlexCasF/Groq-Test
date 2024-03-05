@@ -11,8 +11,8 @@ logging.getLogger("httpcore").setLevel(logging.ERROR)
 logging.getLogger("httpx").setLevel(logging.ERROR)
 logging.getLogger("groq").setLevel(logging.ERROR)
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-user_messages = deque(maxlen=100)
-bot_responses = deque(maxlen=100)
+#user_messages = deque(maxlen=100)
+#bot_responses = deque(maxlen=100)
 
 def query_groq_api(user_message):
     chat_completion = client.chat.completions.create(
@@ -23,8 +23,8 @@ def query_groq_api(user_message):
         model="mixtral-8x7b-32768",
     )
     response_content = chat_completion.choices[0].message.content
-    user_messages.append(user_message)
-    bot_responses.append(response_content)
+    #user_messages.append(user_message)
+    #bot_responses.append(response_content)
     return response_content
 
 @app.route('/chat', methods=['POST'])
