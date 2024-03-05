@@ -6,7 +6,10 @@ from groq import Groq
 
 app = Flask(__name__)
 CORS(app, origins=["*.groq.com", "*.googleapis.com"])
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.ERROR)
+logging.getLogger("httpx").setLevel(logging.ERROR)
+logging.getLogger("groq").setLevel(logging.ERROR)
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 user_messages = deque(maxlen=100)
 bot_responses = deque(maxlen=100)
